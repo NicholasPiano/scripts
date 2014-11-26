@@ -9,5 +9,11 @@ backup = os.path.join('backup','backup')
 output_path = os.path.join('/','Users','nicholaspiano','data','confocal')
 
 for experiment in experiments:
-  print('from: ' + os.path.join(base_path, experiment, backup))
-  print('to: ' + os.path.join(output_path, experiment, backup))
+  from_path = os.path.join(base_path, experiment, backup)
+  to_path = os.path.join(output_path, experiment, backup)
+  file_list = os.listdir(from_path)
+
+  for i, file_name in file_list:
+    full_from_path = os.path.join(from_path, file_name)
+    full_to_path = os.path.join(to_path, file_name)
+    print([experiment, '%d of %d'%(i+1, len(file_list)), full_from_path + ' -> ' + full_to_path])

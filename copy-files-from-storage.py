@@ -6,11 +6,12 @@ import shutil
 base_path = os.path.join('/','Volumes','transport','data','confocal')
 experiments = ['050714','190714','260714']
 backup = os.path.join('backup','backup')
+mask = os.path.join('mask')
 output_path = os.path.join('/','Users','nicholaspiano','data','confocal')
 
 for experiment in experiments:
-  from_path = os.path.join(base_path, experiment, backup)
-  to_path = os.path.join(output_path, experiment, backup)
+  from_path = os.path.join(base_path, experiment, mask)
+  to_path = os.path.join(output_path, experiment, mask)
   file_list = os.listdir(from_path)
 
   #make directories

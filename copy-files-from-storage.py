@@ -8,3 +8,6 @@ experiments = ['050714','190714','260714']
 backup = os.path.join('backup','backup')
 output_path = os.path.join('/','Users','nicholaspiano','data','confocal')
 
+for experiment in experiments:
+  print('from: ' + os.path.join(base_path, experiment, backup))
+  print('to: ' + os.path.join(output_path, experiment, backup))

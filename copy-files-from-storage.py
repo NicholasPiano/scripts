@@ -14,7 +14,7 @@ for experiment in experiments:
   file_list = os.listdir(from_path)
 
   #make directories
-  os.mkdir(os.path.join(experiment, backup))
+  os.mkdir(to_path)
 
   for i, file_name in enumerate(file_list):
 

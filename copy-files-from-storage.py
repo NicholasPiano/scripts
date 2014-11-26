@@ -13,7 +13,7 @@ for experiment in experiments:
   to_path = os.path.join(output_path, experiment, backup)
   file_list = os.listdir(from_path)
 
-  for i, file_name in file_list:
+  for i, file_name in enumerate(file_list):
     full_from_path = os.path.join(from_path, file_name)
     full_to_path = os.path.join(to_path, file_name)
     print([experiment, '%d of %d'%(i+1, len(file_list)), full_from_path + ' -> ' + full_to_path])

@@ -17,41 +17,6 @@ http://wwwsearch.sourceforge.net/mechanize/
 
 #script to download archives from behind a password.
 
-# <tr class="search_bg1 tdpanel" id="rows6">
-#   <td align="center" valign="middle">
-#     <a href="http://www.postmyfiles.com/voxgen/home.php?foId=2080"  class="link">
-#       <img src="http://www.postmyfiles.com/images/folder.gif" alt="Folder" title="Folder" border="0"  />
-#     </a>
-#   </td>
-#   <td align="center" valign="top">
-#     <img src="http://www.postmyfiles.com/images/line_icon2.gif" width="1" height="35" />
-#   </td>
-#   <td align="left" valign="middle" class="tabeltext2">
-#     <a href="http://www.postmyfiles.com/voxgen/home.php?foId=2080"  class="text_product">On Hold 2013 - PCM Mono_3min Seg</a>
-#   </td>
-#   <td align="center" valign="top">
-#     <img src="http://www.postmyfiles.com/images/line_icon2.gif" width="1" height="35" />
-#   </td>
-#   <td width="50" align="left" valign="middle" class="tabeltext">15-02-2013</td>
-#   <td width="1" align="center" valign="top"><img src="http://www.postmyfiles.com/images/line_icon2.gif" width="1" /></td>
-#   <td align="left" valign="middle" class="tabeltext2">0 Dir(s),<br />1 File(s).</td>
-#   <td width="1" align="center" valign="top">
-#     <img src="http://www.postmyfiles.com/images/line_icon2.gif" width="1" height="35" />
-#   </td>
-#   <td align="left" valign="middle" class="tabeltext2">37.2 MB</td>
-#   <td width="1" align="center" valign="top">
-#     <img src="http://www.postmyfiles.com/images/line_icon2.gif" width="1" height="35" />
-#   </td>
-#   <td align="left" valign="middle" class="tabeltext2">
-#     <a href="http://www.postmyfiles.com/voxgen/home.php?action=sharedoc&foId=2080" class="text_product">
-#       <strong>Share</strong>
-#     </a>
-#   </td>
-#   <td width="1" align="center" valign="top">
-#     <img src="http://www.postmyfiles.com/images/line_icon2.gif" width="1" height="35" />
-#   </td>
-
-
 def main(options):
 
   start = dt.datetime.now()
@@ -107,7 +72,7 @@ def main(options):
 
     #loop through files
     for archive in archive_links[link]:
-      if not os.path.exists(os.path.join(base_path, link, archive.text)):
+      if not os.path.exists(os.path.join(base_path, options.root, link, archive.text)):
         print([options.root, link, archive.text, 'time: ', dt.datetime.now()-start])
         b.retrieve(archive.url, os.path.join(base_path, options.root, link, archive.text))
 

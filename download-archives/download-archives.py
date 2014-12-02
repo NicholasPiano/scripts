@@ -7,6 +7,7 @@ from optparse import OptionParser
 import pprint
 import shutil as sh
 import os
+import datetime as dt
 
 '''
 https://docs.python.org/2/library/htmlparser.html
@@ -52,6 +53,16 @@ http://wwwsearch.sourceforge.net/mechanize/
 
 
 def main(options):
+
+  start = dt.datetime.now()
+  print('start: ' + str(start))
+
+  base_path = os.path.join('/','Users','nicholaspiano','code','scripts','download-archives','data')
+  if not os.path.isdir(base_path):
+    os.mkdir(base_path)
+  if not os.path.isdir(os.path.join(base_path, options.root)):
+    os.mkdir(os.path.join(base_path, options.root))
+
   #get browser
   b = mz.Browser()
 
@@ -89,7 +100,6 @@ def main(options):
           if sub_link.url not in [l.url for l in archive_links[link.text]]:
             archive_links[link.text].append(sub_link)
 
-  base_path = os.path.join('/','Users','nicholaspiano','code','scripts','download-archives','data')
   for link in archive_links:
     #create folder for download
     if not os.path.isdir(os.path.join(base_path, link)):
@@ -98,8 +108,12 @@ def main(options):
     #loop through files
     for archive in archive_links[link]:
       if not os.path.exists(os.path.join(base_path, link, archive.text)):
+        print([options.root, link, archive.text, 'time: ', dt.datetime.now()-start])
         b.retrieve(archive.url, os.path.join(base_path, link, archive.text))
 
+  end = dt.datetime.now()
+  duration = end - start
+  print([end, duration])
 
 if __name__ == "__main__":
   parser = OptionParser()

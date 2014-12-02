@@ -24,7 +24,7 @@ def main(options):
   start = dt.datetime.now()
   print('start: ' + str(start))
 
-  base_path = os.path.join('/','Users','nicholaspiano','code','scripts','download-archives','data')
+  base_path = os.path.join('/','Users','nicholaspiano','data','sdg','download-archives')
   if not os.path.isdir(base_path):
     os.mkdir(base_path)
   if not os.path.isdir(os.path.join(base_path, options.root)):

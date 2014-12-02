@@ -102,14 +102,14 @@ def main(options):
 
   for link in archive_links:
     #create folder for download
-    if not os.path.isdir(os.path.join(base_path, link)):
-      os.mkdir(os.path.join(base_path, link))
+    if not os.path.isdir(os.path.join(base_path, options.root, link)):
+      os.mkdir(os.path.join(base_path, options.root, link))
 
     #loop through files
     for archive in archive_links[link]:
       if not os.path.exists(os.path.join(base_path, link, archive.text)):
         print([options.root, link, archive.text, 'time: ', dt.datetime.now()-start])
-        b.retrieve(archive.url, os.path.join(base_path, link, archive.text))
+        b.retrieve(archive.url, os.path.join(base_path, options.root, link, archive.text))
 
   end = dt.datetime.now()
   duration = end - start

@@ -1,0 +1,6 @@
+#!/usr/bin/perl
+%countries = ("ala", 2, "alb", 4, "cen", 2, "eas", 4, "gre", 3, "nwt", 4, "ont", 6, "que", 3, "wes", 4);
+@ala = ("alb", "nwt");
+@alb = ("ala", "nwt", "wes", "ont");
+@cen = ("wes", "eas");
+@eas = ("wes", "ont", "cen", "que");

@@ -1,0 +1,4 @@
+#!usr/bin/python
+
+for i in range(10000):
+	print i	

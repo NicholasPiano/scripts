@@ -1,0 +1,10 @@
+while ($search_string =~ /($test_positive)/g) {
+	push (pos $search_string);
+	$cnt++;
+	
+	@qaz_array = split "", "qfrgqlqpq";
+$qaz1 = grep /q/, @qaz_array;
+
+print "qfrgqlqpq: $qaz1\n";
+returns:
+qfrgqlqpq: 4

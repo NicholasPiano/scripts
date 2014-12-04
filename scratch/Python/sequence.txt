@@ -1,0 +1,27 @@
+Generate grammar
+---------------
+
+SLMDirect.perl -AddTest test_set_1 -CreateRegExp -DowncaseUtt -Language en-GB -ReferenceTags trueTags_Combined_full -TagsDirect combined_final_2_gen_train_5
+
+
+Compile grammar - E:\project1\fulltest_combined_final_gen_semantic_tags_1.7_no_explicit_underspec_new_4\slmdirect_results
+---------------
+
+sgc -train SLMDIRECT_TESTGRAMMAR_nuance9_training_slm_fsm.xml -no_gram
+
+ssm_train SLMDIRECT_TESTGRAMMAR_nuance9_training_ssm.xml
+
+sgc -optimize 9 SLMDIRECT_TESTGRAMMAR_nuance9_wrapper.grxml
+
+
+>>> produces SLMDIRECT_TESTGRAMMAR_nuance9_wrapper.gram
+
+
+
+Perform Recognition Test - C:\EIG\testdir\full_test_set_semantic_tags_1.7\test-accTest
+------------------------
+
+acc_test acc_test.TEST.1001.script.txt -local_log acc_test.TEST.1001.log-file
+
+outputs utd file to be modified (remove c:/EIG/voice-data/ and change ':' to <tab>) and place in excel results file.
+

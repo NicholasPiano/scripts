@@ -1,0 +1,53 @@
+#!usr/bin/perl
+
+print "Enter the desired math function.\n";
+$func = <STDIN>;
+chop($func);
+if ($func eq "arithmetic sequence") {
+	print "please enter the multiplier.\n";
+	$mult = <STDIN>;
+	chop($mult);
+	print "now enter the second term.\n";
+	$st = <STDIN>;
+	chop($st);
+	for ($i = 5; $i < 11; $i++) {
+		$dividend += ($mult*$i+$st);
+		print ("dividend = ", $dividend);
+		print "\n";
+		if ($i == 10) {
+			print ("final dividend = ", $dividend);
+			print "\n";
+		}
+	} 
+} elsif ($func eq "quadratic formula") {
+	print "enter the coefficients, one by one, separated by commas.\n";
+	while ($count > 0) {
+		$i = <STDIN>;
+		chop($i);
+		$i =~ tr/ / /s;
+		if ($i =~ /\,/) {
+			$sep = ",";
+			$i =~ s/ //g;
+		} elsif ($i =~ /\t/) {
+			$sep = "\t";
+			$i =~ s/ //g;
+		} elsif ($i =~ / /) {
+			$sep = " ";
+		}
+		
+		@temp_array = split $sep, $i;
+		$elem = 0;
+		foreach $elem (@temp_array) {
+			$array[$elem] = $elem;
+		}
+		$elem++;
+		$count--;
+	}
+	
+} elsif ($func eq "cubic formula") {
+} elsif ($func eq "vectors") {
+} elsif ($func eq "matrices") {
+} elsif ($func eq "summation/sequences") {
+} else {
+}
+	(-$b+sqrt($b^2-4*$a*$c))/2$a

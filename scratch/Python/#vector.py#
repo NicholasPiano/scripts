@@ -1,0 +1,15 @@
+#!usr/bin/python
+
+#defines vector object
+
+import math
+
+class vector:
+    v = []
+
+    #constructor
+    def __init__(self, a):
+        self.v = a
+
+    def magnitude():
+        sum = sum(i)

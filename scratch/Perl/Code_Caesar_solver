@@ -1,0 +1,57 @@
+#!/usr/bin/perl
+@alphbt = ("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z");
+
+print "Input: ";
+$in = <STDIN>;
+change($in);
+
+@in = split (/\s/, $key);
+
+$qaz = scalar(@in);
+
+print "Output: ";
+$out = <STDIN>;
+change($out);
+
+@out = split (/\s/, $key);
+
+print @in, "\n";
+print @out, "\n";
+
+for ($x = 0; $x < $qaz; $x++) {
+	$diff = $out[$x] - $in[$x];
+	if ($diff < -10) {
+		print (-$diff - 26)," ";
+	} else {
+		print "$diff \s";
+	}
+}
+print
+print "\n";
+
+sub change
+{
+	my($a) = @_;
+	
+	chop($a);
+	$a = lc($a);
+	$a =~ s/\s+//g;
+	
+	$a =~ s/([a-z])/turn_key($1)/eg;
+	
+	$key = $a;
+
+}
+sub turn_key
+{
+	my($a) = @_;
+	
+	my($b);
+
+	$i = 0;
+	while ($alphbt[$i] ne $a) {
+		$i++;
+	}
+
+	return ("$i ");
+}

@@ -1,0 +1,12 @@
+#!c:/cygwin/usr/local/bin/perl.exe
+print "Input";
+print "\n";
+$num = <STDIN>;
+chop($num);
+@split_array = split "/\./", $num;
+#print "", $split_array[0];
+print "\n";
+print "", $split_array[1];
+print "\n";
+#for(
+#$sum =  

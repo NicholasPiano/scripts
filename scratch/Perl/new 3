@@ -1,0 +1,11 @@
+#!usr/bin/perl
+print "please enter the multiplier.\n";
+$mult = <STDIN>;
+chop($mult);
+print "now enter the second term.\n";
+$st = <STDIN>;
+chop($st);
+for ($i = 5; $i < 11; $i++) {
+	$dividend += (($mult)($i)+($st));
+} 
+print ("dividend = ", $dividend);

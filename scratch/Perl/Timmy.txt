@@ -1,0 +1,30 @@
+#!usr/bin/perl
+
+if (condition) {
+	do something
+} elsif (other condition)	{
+	do something else
+} elsif (other condition)	{
+	do something else
+} else {
+	do something else
+}
+
+$square = green;
+
+if (square == red) {
+	$square = blue;
+} else {
+	if ($square == green) {
+		$square = yellow;	
+	} else {
+		$square = green;
+	}
+}
+
+@array = (timmy, tommy, tiny);
+
+$variable = $array[2];
+
+$variable = tiny
+

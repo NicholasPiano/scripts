@@ -1,0 +1,8 @@
+$input = <STDIN>;
+chop($input);
+
+$input =~ s/ /","/g;
+$input =~ s///g;
+
+print $input;
+print "\n";

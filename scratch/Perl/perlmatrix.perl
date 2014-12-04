@@ -1,0 +1,292 @@
+#!c:/cygwin/usr/local/bin/perl.exe
+@matrix = ();
+print "please enter the size of the matrix\n";
+$size = <STDIN>;
+chop($size);
+$type = "normal";
+if ($size =~ /c/) {
+	$type = "cubic";
+}
+$size =~ s/d//g;
+$matrix[$size] = $matrix[0];
+$row = 0;
+while ($size <= 1) {
+	print "sorry, this size does not have an inverse. please enter another size.\n";
+	$size = <STDIN>;
+	chop($size);
+} 
+if (($size >= 2) && $type eq "normal") {
+# This section populates the original matrix.
+	print "please enter the lines, one by one, separated by commmas\n";
+	doInputs($size, \@matrix);
+	if ($size > 2) {
+		@detmat = @matrix;
+		for ($row = 0; $row < $size; $row++) {
+			for ($i = $size; $i < 2*$size-1; $i++) {
+				$detmat[$row][$i] = $matrix[$row][$i - $size];  
+			}
+		}  
+		@det = ();
+		$determinant = 0;
+		for ($row = 0; $row < $size; $row++) {
+			$det[$row] = 1;
+			for ($j = 0; $j < $size; $j++) {
+				$mult = 1;
+				$mult = $mult*$detmat[$j][$j + $row];
+				$det[$row] = $det[$row]*$mult;
+			} 
+		} 
+		for ($row = 0; $row < $size; $row++) {
+			$det[$row+$size] = 1;
+			for ($i = 2*$size-2, $j = 0; $i >= $size-1, $j < $size; $i--, $j++) {	
+				$mult = 1;
+				$mult = $mult*$detmat[$j][$i - $row];
+				$det[$row+$size] = $det[$row+$size]*$mult;
+			}
+		}
+		for ($e = 0; $e < 2*$size; $e++) {
+			if ($e < $size) {
+				$determinant = $determinant + $det[$e];
+			} else {
+				$determinant = $determinant - $det[$e];
+			}
+		}	
+	} else {
+		$determinant = $matrix[0][0]*$matrix[1][1] - $matrix[1][0]*$matrix[0][1];
+	}
+	if ($determinant != 0) {
+	# This section calculates the inverse matrix of the original matrix.
+		# Appends unit matrix to original.
+		doInverse($size, \@matrix);
+		print "\n";
+		print "determinant of matrix: $determinant\n";
+		print "\n";
+		print "Inverse of matrix:\n";
+		for ($j = 0; $j < $size; $j++) {
+			for ($i = $size; $i < 2*$size; $i++) {
+				if (abs($matrix[$j][$i]) < 10e-9) {
+					$matrix[$j][$i] = 0;
+				}
+				printf ("%5.4f    " ,$matrix[$j][$i]);
+			}
+			print "\n";
+		}
+	} else {
+			print "Sorry, this matrix does not have an inverse. Please enter another one.\n";
+	}
+} else {
+	@matrix1 = ();
+	@matrix2 = ();
+	@multmat = (1,0,0,1,0,1,1,0);
+	@resultmat = (0,0,0,0,0,0,0,0);
+	if ($size == 2) {
+		$newsize = 8;
+		print "please enter the lines of the first indent, seperated by commas\n";
+		doInputs($size, \@matrix1);
+		print "now enter the lines of second indent\n";
+		doInputs($size, \@matrix2);
+
+		$dmat[0][0] = $matrix1[0][0]; 
+		$dmat[0][1] = $matrix1[0][1];
+		$dmat[0][2] = $matrix2[0][0]; 
+		$dmat[0][3] = 0; 
+		$dmat[0][4] = -$matrix1[1][0]; 
+		$dmat[0][5] = 0; 
+		$dmat[0][6] = 0; 
+		$dmat[0][7] = 0; 
+		
+		$dmat[1][0] = $matrix1[0][1]; 
+		$dmat[1][1] = ($matrix1[0][0]-$matrix2[0][1]+$matrix1[1][1]); 
+		$dmat[1][2] = 0; 
+		$dmat[1][3] = $matrix1[0][1]; 
+		$dmat[1][4] = 0;
+		$dmat[1][5] = -$matrix1[0][1];
+		$dmat[1][6] = 0; 
+		$dmat[1][7] = 0; 
+		
+		$dmat[2][0] = $matrix1[1][0];
+		$dmat[2][1] = 0; 
+		$dmat[2][2] = ($matrix1[1][1]-$matrix2[1][0]+$matrix1[0][0]); 
+		$dmat[2][3] = $matrix1[1][0];
+		$dmat[2][4] = 0;
+		$dmat[2][5] = 0; 
+		$dmat[2][6] = -$matrix1[1][0];
+		$dmat[2][7] = 0; 
+		
+		$dmat[3][0] = 0;
+		$dmat[3][1] = $matrix1[1][0];
+		$dmat[3][2] = $matrix2[1][1];
+		$dmat[3][3] = $matrix1[1][1];
+		$dmat[3][4] = 0;
+		$dmat[3][5] = 0;
+		$dmat[3][6] = 0; 
+		$dmat[3][7] = -$matrix2[1][1];
+		
+		$dmat[4][0] = -$matrix2[0][0];
+		$dmat[4][1] = 0;
+		$dmat[4][2] = 0; 
+		$dmat[4][3] = 0;
+		$dmat[4][4] = ($matrix2[0][1]-$matrix1[0][0]+$matrix2[1][0]);
+		$dmat[4][5] = $matrix2[0][0];
+		$dmat[4][6] = $matrix2[0][0];
+		$dmat[4][7] = 0; 
+		
+		$dmat[5][0] = 0;
+		$dmat[5][1] = -$matrix2[1][1];
+		$dmat[5][2] = 0;
+		$dmat[5][3] = 0; 
+		$dmat[5][4] = $matrix1[0][1];
+		$dmat[5][5] = $matrix2[0][1];
+		$dmat[5][6] = 0;
+		$dmat[5][7] = $matrix2[0][0];	
+		
+		$dmat[6][0] = 0; 
+		$dmat[6][1] = 0;
+		$dmat[6][2] = -$matrix2[0][0];
+		$dmat[6][3] = 0; 
+		$dmat[6][4] = $matrix2[1][1];
+		$dmat[6][5] = 0; 
+		$dmat[6][6] = $matrix2[1][0]; 
+		$dmat[6][7] = $matrix1[1][0]; 
+		
+		$dmat[7][0] = 0; 
+		$dmat[7][1] = 0;
+		$dmat[7][2] = 0; 
+		$dmat[7][3] = -$matrix2[1][1];
+		$dmat[7][4] = 0;
+		$dmat[7][5] = $matrix2[1][1];
+		$dmat[7][6] = $matrix2[1][1];
+		$dmat[7][7] = ($matrix2[1][0]-$matrix2[0][1]+$matrix1[1][1]); 
+		for ($j = 0; $j < $newsize; $j++) {
+			for ($i = 0; $i < $newsize; $i++) {
+				printf ("%5.1f    " ,$dmat[$j][$i]);
+			}
+			print "\n";
+		}
+		
+		doInverse($newsize, \@dmat);
+		print "\n";
+		for ($j = 0; $j < $newsize; $j++) {
+			for ($i = $newsize; $i < 2*$newsize; $i++) {
+				printf ("%5.4f    " ,$dmat[$j][$i]);
+			}
+			print "\n";
+		}
+		
+		for ($row = 0; $row < $newsize; $row++) {
+			for ($j = 0; $j < $newsize; $j++) {
+				$resultmat[$row] += $multmat[$j]*$dmat[$row][$j+$newsize];
+#				print "row=", $row, ", j=", $j, ", resultmat=", $resultmat[$row], ", multmat=", $multmat[$j], ", dmat=", $dmat[$row][$j+$newsize], "\n"; 
+			}
+#			print $resultmat[$row],"\n";
+			@multmat = (1,0,0,1,0,1,1,0);
+		}
+		$matrix1[0][0] = $resultmat[0];
+		$matrix1[0][1] = $resultmat[1];
+		$matrix1[1][0] = $resultmat[2];
+		$matrix1[1][1] = $resultmat[3];
+		
+		$matrix2[0][0] = $resultmat[4];
+		$matrix2[0][1] = $resultmat[5];
+		$matrix2[1][0] = $resultmat[6];
+		$matrix2[1][1] = $resultmat[7];
+		print "inverse of cubic matrix:\n";
+		print "First indent\n";
+		for ($j = 0; $j < $size; $j++) {
+			for ($i = 0; $i < $size; $i++) {
+				if (abs($matrix1[$j][$i]) < 10e-9) {
+					$matrix1[$j][$i] = 0;
+				}
+				printf ("%5.9f    " ,$matrix1[$j][$i]);
+			}
+			print "\n";
+		}
+		print "Second indent\n";
+		for ($j = 0; $j < $size; $j++) {
+			for ($i = 0; $i < $size; $i++) {
+				if (abs($matrix2[$j][$i]) < 10e-9) {
+					$matrix2[$j][$i] = 0;
+				}
+				printf ("%5.9f    " ,$matrix2[$j][$i]);
+			}
+			print "\n";
+		}
+	}
+}
+sub doInputs
+{
+my($count, $matrix3) = @_;
+
+my($i);
+my($j);
+my($sep);
+my($elem);
+my($row);
+my(@temp_array);
+
+	while ($count > 0) {
+		$i = <STDIN>;
+		chop($i);
+		$i =~ tr/ / /s;
+		if ($i =~ /\,/) {
+			$sep = ",";
+			$i =~ s/ //g;
+		} elsif ($i =~ /\t/) {
+			$sep = "\t";
+			$i =~ s/ //g;
+		} elsif ($i =~ / /) {
+			$sep = " ";
+		}
+		
+		@temp_array = split $sep, $i;
+		$j = 0;
+		foreach $elem (@temp_array) {
+			$matrix3->[$row][$j] = $elem;
+			$j++;
+		}
+		$row++;
+		$count--;
+	}
+}
+sub doInverse
+{
+my($size, $matrix) = @_;
+
+my($i);
+my($j);
+my($row);
+my($const);
+my($const2);
+
+	for ($row = 0; $row < $size; $row++) {
+		for ($i = $size; $i < 2*$size; $i++) {
+			if ($row + $size == $i) {
+				$matrix->[$row][$i] = 1;
+			} else {
+				$matrix->[$row][$i] = 0;
+			}    
+		}
+	} 
+	for ($row = 0; $row < $size; $row++) {
+		if ($matrix->[$row][$row] == 0) {
+			for ($i = 0; $i < 2*$size; $i++) {
+				if ($row == $size - 1) {
+					$matrix->[$row][$i] = $matrix->[$row][$i] + $matrix->[0][$i]; 	
+				} else {
+					$matrix->[$row][$i] = $matrix->[$row][$i] + $matrix->[$row + 1][$i]; 
+				}
+			}
+		}
+		$const = $matrix->[$row][$row];
+		for ($j = 0; $j < $size; $j++) {
+			$const2 = $matrix->[$j][$row];
+			for ($i = 0; $i < 2*$size; $i++) {
+				if ($j == $row) {
+					$matrix->[$j][$i] = $matrix->[$j][$i]/$const;		
+				} else {
+					$matrix->[$j][$i] = (-$const2/$matrix->[$row][$row])*$matrix->[$row][$i] + $matrix->[$j][$i];
+				}
+			}
+		}
+	}
+}

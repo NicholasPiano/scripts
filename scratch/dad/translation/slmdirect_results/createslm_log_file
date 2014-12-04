@@ -1,0 +1,100 @@
+>>>LOG - (Main::Info) - 0: 
+	--- *** Input Command Line: SLMDirect.perl input.txt ***
+
+
+>>>BOTH - (Main::CheckRules) - 1: 
+	--- See error #1 below (Can't find RULES FILE: ./slmdirect_nlrc)
+>>>BOTH UNDERLINE 0 - (Main::CreateMainGrammar) - 2: 
+
+---------------------------------------------
+---------------------------------------------
+
+Total Warnings:	0
+
+Total Errors:	1
+
+	1: Can't find RULES FILE: ./slmdirect_nlrc
+
+
+---------------------------------------------
+---------------------------------------------
+
+>>>LOG - (Main::Info) - 0: 
+	--- *** Input Command Line: SLMDirect.perl input.txt ***
+
+
+>>>BOTH - (Main::CheckRules) - 1: 
+	--- See error #1 below (Can't find RULES FILE: ./slmdirect_nlrc)
+>>>BOTH UNDERLINE 0 - (Main::CreateMainGrammar) - 2: 
+
+---------------------------------------------
+---------------------------------------------
+
+Total Warnings:	0
+
+Total Errors:	1
+
+	1: Can't find RULES FILE: ./slmdirect_nlrc
+
+
+---------------------------------------------
+---------------------------------------------
+
+>>>LOG - (Main::Info) - 0: 
+	--- *** Input Command Line: SLMDirect.perl input.txt ***
+
+
+>>>BOTH - (Main::CheckRules) - 1: 
+	--- See error #1 below (Can't find RULES FILE: ./slmdirect_nlrc)
+>>>BOTH UNDERLINE 0 - (Main::CreateMainGrammar) - 2: 
+
+---------------------------------------------
+---------------------------------------------
+
+Total Warnings:	0
+
+Total Errors:	1
+
+	1: Can't find RULES FILE: ./slmdirect_nlrc
+
+
+---------------------------------------------
+---------------------------------------------
+
+>>>LOG - (Main::Info) - 0: 
+	--- *** Input Command Line: SLMDirect.perl input.txt ***
+
+
+>>>BOTH - (Main::CheckRules) - 1: 
+	--- See error #1 below (Can't find RULES FILE: ./slmdirect_nlrc)
+>>>BOTH UNDERLINE 0 - (Main::CreateMainGrammar) - 2: 
+
+---------------------------------------------
+---------------------------------------------
+
+Total Warnings:	0
+
+Total Errors:	1
+
+	1: Can't find RULES FILE: ./slmdirect_nlrc
+
+
+---------------------------------------------
+---------------------------------------------
+
+>>>LOG - (Main::Info) - 0: 
+	--- *** Input Command Line: SLMDirect.perl -AddTest test_set_1 -CreateRegExp -DowncaseUtt -Language en-GB -ReferenceTags trueTags_Combined_full -TagsDirect combined_final_2_gen_train_5 ***
+
+
+>>>BOTH - (checkRules) - 0: 
+Task 1: Checking Rules in ./slmdirect_template_nlrc
+>>>BOTH - (Main::GetReclassInfo) - 1: 
+Task 2: Loading Reclassifications File
+>>>BOTH - (Main::RECLASS) - 2: 
+	--- See warning #1 below (Reclassification File: ./slmdirect_results/createslmDIR_important_files/info_reclass_file NOT Found)
+>>>BOTH - (Main::RECLASS) - 3: 
+>>>BOTH - (Main::GetKnownCatsInfo) - 2: 
+Task 3: Loading Known Categories File
+>>>BOTH - (Main::KNOWNCATS) - 3: 
+	--- See warning #2 below (Known Classifications File: ./slmdirect_results/createslmDIR_important_files/info_known_cats NOT Found)
+>>>BOTH - (Main::RECLASS) - 4: 

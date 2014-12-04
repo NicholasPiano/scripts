@@ -1,0 +1,6 @@
+#!/usr/bin/perl
+%countries = ("afg", 5, "ala", 3, "alb", 5, "arg", 2, "bra", 4, "cen", 3, "con", 3, "chi", 6, "easa", 2, "easu", 4, "egy", 4, "gre", 4, "gree", 4, "ice", 3, "indi", 4, "ind", 3, "irk", 4, "jap", 2, "kam", 5, "mad", 2, "mid", 6, "mon", 5, "new", 3, "nora", 6, "nore", 5, "nwt", 4, "ont", 6, "per", 3, "que", 3, "sca", 4, "sia", 3, "sib", 5, "sou", 3, "soue", 6, "ukr", 6, "ura", 4, "ven", 3, "wesa", 3, "wesu", 4, "yak", 3);
+@afg = ("ura", "ind", "mid", "chi", "urk");
+@ala = ("nwt", "alb", "kam");
+@alb = ("ala", "nwt", "ont", "wesu");
+@arg = ("bra", "per");

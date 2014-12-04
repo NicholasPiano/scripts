@@ -1,0 +1,46 @@
+#!usr/bin/perl
+@anss = ();
+@difs = ();
+@difs2 = ();
+$no = 6;
+for ($a = 1; $a < $no+1; $a++) {
+	$b = (($a**2) + ($a-1));
+	$a1 = -2*$a - 1;
+	$a2 = -2*$a - 2;
+	@xs = ();
+	@ys = ();
+	$xs[0] = (($a2)-(sqrt(($a2)**2 - 4*$b)))/2; 
+	$xs[1] = (($a1)-(sqrt(($a1)**2 - 4*$b)))/2; 
+	$xs[2] = (($a1)+(sqrt(($a1)**2 - 4*$b)))/2; 
+	$xs[3] = (($a2)+(sqrt(($a2)**2 - 4*$b)))/2; 
+	for ($i = 0; $i < 4; $i++) {
+		$xs[$i] = -1*$xs[$i];
+		$ys[$i] = ($xs[$i] - $a)**2 + $b;
+	}
+#	print "x1=", $xs[0], ", x2=", $xs[1], ", x3=", $xs[2], ", x4=", $xs[3];
+#	print "\n";
+	$d = sqrt((($xs[1] - $xs[0]) - ($xs[3] - $xs[2]))**2 + (($ys[1] - $ys[0]) - ($ys[3] - $ys[2]))**2);
+	$anss[$a-1] = $d;
+	print "d=", $d; #, ", a=", $a, ", b=", $b;
+	print "\n";
+#	$in = <STDIN>;
+#	chop($in);
+}
+for ($i = 0; $i < $no-1; $i++) {
+	$difs[$i] = $anss[$i+1] - $anss[$i]; 
+	print "\n", $difs[$i];
+	print "\n";
+}
+print "\n";
+for ($i = 0; $i < $no-2; $i++) {
+	$difs2[$i] = $difs[$i+1] - $difs[$i];
+	print "\n", $difs2[$i];
+	print "\n";
+}
+#sub dodifs
+#my $i;
+
+#for ($i = 0; $i < $no-2; $i++) {
+#	$difs2->[$i] = $difs->[$i+1] - $difs->[$i];
+#	print "\n", $difs2->[$i];
+#	print "\n";

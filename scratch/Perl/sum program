@@ -1,0 +1,13 @@
+#!usr/bin/perl
+print "x=?\n";
+print "\n";
+$x = <STDIN>;
+chop($x);
+@arr1 = split "", $x;
+$a = scalar(@arr1);
+$c = 0;
+for ($b = 0; $b < $a; $b++) {
+	$c = $c + $arr1[$b];
+} 
+print "sum=", $c;
+print "\n";

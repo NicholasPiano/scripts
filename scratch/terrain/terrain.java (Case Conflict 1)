@@ -1,0 +1,30 @@
+//(terrain/terrain) - Terrain environment
+
+import java.io.*;
+import java.lang.Math;
+
+public class Terrain {
+    //define through input on intial conditions
+    public static void main(String[] args) {
+	Console Con = System.console();
+	int x_size, y_size, x, y;
+	double mass, energy, heuristic, avg;
+	//Input
+	//String x_string = Con.readLine("Enter an x for the array: ");
+	x_size = 50;//Integer.parseInt(x_string.trim());
+	//String y_string = Con.readLine("Enter a y for the array: ");
+	y_size = 50;//Integer.parseInt(y_string.trim());
+	String avg_string = Con.readLine("Enter an average height for the array: ");
+	avg = Double.parseDouble(avg_string.trim());
+	//define grid
+	Grid G1 = new Grid(x_size, y_size, avg);
+	G1.printGridToFile();
+	//define starting position and properties for rover
+	//Rover R = new Rover(x, y, mass, energy);
+	
+    }
+    //public double lowest_cost(double move_array[][]) { //lowest non-zero cost
+	//array containing possible moves
+	//return cost;
+	//}
+}

@@ -1,0 +1,26 @@
+<html>
+<title>Test</title>
+
+<p id = "p1"  onclick = "moveRight()">Some text here for you to click on</p>
+
+<script type="text/javascript">
+
+var userWidth = window.screen.width;
+function moveRight() {
+	var pp = document.getElementById("x");
+	var lft = parseInt(pp.style.left);
+	var tim = setTimeout("moveRight()",20);  // 20 controls the speed
+	lft = lft+5;  // move by 5 pixels
+	pp.style.left = lft+"px";
+	if (lft > userWidth + 10) {  // left edge of image past the right edge of screen
+		pp.style.left = -200;  // back to the left
+		clearTimeout(tim);
+	}
+}
+
+</script>
+
+<img src="door_choice.jpg" id="x" style="position:relative;top:10px;left:-200px;"><br>
+
+</html>
+

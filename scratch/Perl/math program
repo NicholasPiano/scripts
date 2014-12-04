@@ -1,0 +1,41 @@
+#!usr/bin/perl
+
+print "Enter the desired math function.\n";
+$func = <STDIN>;
+chop($func);
+if ($func eq "arithmetic sequence") {
+	print "please enter the multiplier.\n";
+	$mult = <STDIN>;
+	chop($mult);
+	print "now enter the second term.\n";
+	$st = <STDIN>;
+	chop($st);
+	for ($i = 5; $i < 11; $i++) {
+		$dividend += ($mult*$i+$st);
+		print ("dividend = ", $dividend);
+		print "\n";
+		if ($i == 10) {
+			print ("final dividend = ", $dividend);
+			print "\n";
+		}
+	} 
+} elsif ($func eq "quadratic formula") {
+	print "Enter the coefficients, one by one, separated by commas.\n";
+	$i = <STDIN>;
+	chop($i);
+	$sep = ",";
+	($a, $b, $c) = split $sep, $i; 
+	$ans1 = (-$b+sqrt($b^2-4*$a*$c))/2$a;
+	$ans2 = (-$b-sqrt($b^2-4*$a*$c))/2$a;
+	print "x = ", $ans1, " or ", $ans2;
+	print "\n";
+} elsif ($func eq "cubic formula") {
+} elsif ($func eq "vectors") {
+} elsif ($func eq "matrices") {
+} elsif ($func eq "summation/sequences") {
+} else {
+}
+	
+
+	
+	

@@ -1,0 +1,48 @@
+#!usr/bin/perl
+
+#-, [A-Z], [a-z], [0-9], @, ., :, (, ), _, ', /, +, ", (,), ( )
+
+%a1 = ("a","1","b","2","c","3","d","4","e","5","f","6","g","7","h","8","i","9","j","10","k","11","l","12","m","13","n","14","o","15","p","16","q","17","r","18","s","19","t","20","u","21","v","22","w","23","x","24","y","25","z","26");
+
+%a2 = ("1","a","2","b","3","c","4","d","5","e","6","f","7","g","8","h","9","i","10","j","11","k","12","l","13","m","14","n","15","o","16","p","17","q","18","r","19","s","20","t","21","u","22","v","23","w","24","x","25","y","26","z");
+
+%a3 = ("a","2","b","3","c","5","d","7","e","11","f","13","g","17","h","19","i","23","j","29","k","31","l","37","m","41","n","43","o","47","p","53","q","59","r","61","s","67","t","71","u","73","v","79","w","83","x","89","y","97","z","101");
+
+# get key
+$key = <STDIN>;
+chop($key);
+@key_array = split(//, $key);
+
+# make hash of key letters and their prime square roots
+for($i = 0; $i < scalar(@key); $i++) {
+	$x = sqrt($a3{$key[$i]});
+	$x =~ s/\D//g;
+	# ordered by key
+	$sqrts_key_hash{$key[$i]} = $x;
+	# ordered by value
+	$sqrts_value_hash{$i} = $x;
+}
+
+# generate array of values from square roots
+for($i = 0; $i < scalar(@key); $i++) {
+	push(@sqrts_array, split(//, $sqrts_key_hash{$key[$i]}));
+}
+
+# phrase to be cyphered
+$in = <STDIN>;
+chop($in);
+@in = split(//, $in);
+
+# generate cypher code based on input length
+#needs changing. use square root subroutine  here.
+#1. calculate the number of digits necessary to encrypt string
+#2. for characters (1 - (n - (9 mod n))/9) square root of $sqrts_value_hash{1}, etc.
+#3. for last one accommodate for extra characters
+#4. encrpyt key with sqaure root of exponent of primes a^b^c^d... etc.
+#5. output encrypted string
+#6. output encrypted key   
+$j = 0;
+while (scalar(@sqrts_array) < scalar(@in)) {
+	push(@sqrts_array, split(//, $sqrts2_hash{$j}));
+	$j++;
+}

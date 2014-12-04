@@ -1,0 +1,18 @@
+#!/usr/bin/perl
+$password = "HAL";
+print "What is your name?";
+$name = <STDIN>;
+chop($name);
+if ($name eq "Nicholas") {
+	print "Hello, Nicholas!\n";
+} else {
+	print "Hello, $name!\n";
+	print "Guess the password... $name.\n";
+	$guess = <STDIN>;
+	chop($guess);
+	while ($guess ne $password) {
+		print "I'm sorry, I can't let you do that, $name. Try again.\n";
+		$guess = <STDIN>;
+		chop($guess);
+	}
+}

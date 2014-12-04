@@ -1,0 +1,60 @@
+#!usr/bin/perl
+
+#language program
+
+#1. compile english dictionary - words by frequecy and category
+
+#2. Anagrams - compile phoneme list - pronounciation rules, prohibitions
+
+@vowel_array = ("a","e","i","o","u");
+@con_array = ("b","d","f","h","j","k","l","m","n","p","r","s","t","z");
+@forbidden = ("ae","aa","ii","iu","io","ee","eo","uu","uo","oa","oe","oo");
+
+Anagram(@vowel_array);
+
+sub Anagram {
+	
+	my(@char_array) = @_; #stores original set of characters
+	my(@temp_array); #stores progressively longer sets of aggregated characters
+	my(@total_array); #stores final output
+	my(@trans_array); #stores set of strings that char_array adds to
+	my($char_lim); #total cycles
+	my($i); # counts total cycles
+	my($k); #updates trans_array position based on last count
+	my($lm); #dummy variable
+	my($j); #counts through char_array
+	
+	print "Enter Character Limit:\n";
+	$char_lim = <STDIN>;
+	chop($char_lim);
+	
+	@trans_array = @char_array;
+	for($i=1; $i<=$char_lim; $i++) {
+		@temp_array = ();
+		$k = 0;
+		foreach $lm (@trans_array) {
+			for($j=0; $j<scalar(@char_array); $j++) { 
+				$temp_array[$j+$k] = $lm.$char_array[$j];
+			}
+			$k += scalar(@char_array);
+		}
+		@trans_array = @temp_array;
+		push(@total_array, @temp_array);
+	}
+	$p = 0;
+	foreach $lm1 (@total_array) {
+		print $lm1, " ";
+		$p++;
+		if ($p%5 = 0) {
+			print "\n";
+		}
+	}
+}
+#syllable generator
+
+
+
+#3. random word generator - generate stem for category titles
+#4. grammar - word endings, prefixes for case, suffixes for tense
+
+#(case-type)-noun-(tense-gender)

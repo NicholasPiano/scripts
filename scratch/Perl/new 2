@@ -1,0 +1,31 @@
+determinant 
+	@detmat = @matrix;
+	for ($row = 0; $row < $size; $row++) {
+		for ($i = $size; $i < 2*$size-1; $i++) {
+			$detmat[$row][$i] = $matrix[$row][$i - $size];  
+		}
+	}  
+	print "$detmat[0][$size], $matrix[0][0]\n";
+	@det = ();
+	$determinant = 0;
+	for ($row = 0; $row < $size; $row++) {
+		for ($j = 0; $j < $size; $j++) {
+			$det[$row] = 1;
+			$det[$row] = $det[$row]*$detmat[$j + $row][$j];
+		} 
+		for ($i = 2*$size-2; $i >= $size-1; $i--) {	
+			$det[$row+$size] = 1;
+			$det[$row+$size] = -$det[$row+$size]*$detmat[$row][$i];
+		}
+	}
+	for ($e = 0; $e < 2*$size; $e++) {
+		$determinant = $determinant + $det[$e];
+	}
+	print "$determinant\n";
+	
+
+	
+	
+	
+	
+	

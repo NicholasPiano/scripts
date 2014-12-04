@@ -1,0 +1,39 @@
+#!/usr/bin/perl
+@alphbt = ("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z");
+
+@p = ("3","1","4","1","5","9","2","6","5","3","5","8","9","7","9","3","2","3","8","4","6","2","6","4","3","3","8","3","2","7","9","5","0","2","8","8","4","1","9","7","1","6","9","3","9","9","3","7","5","1","0","5","8","2","0","9","7","4","9","4","4","5","9","2","3","0","7","8","1","6","4","0","6","2","8","6");
+
+@n = ("3","5","4","2","3","8","7","4","1","9","5","1","5","3","6","4","5","6","8","5","6","5","6","5","5","6","4","8","9","2");
+
+print "Phrase to be decyphered: ";
+$input = <STDIN>;
+chop($input);
+$input = lc($input);
+
+@cypher = split(//, $input);
+
+$i = 0;
+$n = 0;
+while ($i < scalar(@cypher)) {		#going through @cts
+	if ($cypher[$i] eq " ") {		#if whitespace
+		print " ";
+		$i++;
+		$n++;
+	} else {					#if not
+		$value = $p[$i - $n];
+		foreach $j (@alphbt) {	#going through @alphbt
+			if ($j eq $cypher[$i]) {	#set $alphbt_elem = $cts_elem
+				$k = 0;
+				while ($j ne $alphbt[$k]) {	#look through @alphbt
+					$k++;	
+				}
+				if ($k - $value < 0) {	#if less than length of @alphbt
+					$k = $k + scalar(@alphbt);
+				}
+				print $alphbt[$k - $value];
+			}
+		}
+		$i++;
+	}
+}
+print "\n";

@@ -1,0 +1,23 @@
+public class Grid {
+    Random generator = new Random(); //activate random generator
+    private int array_size, cell_array[][], count; //instances of Percolation
+    public Grid (int size, int density) { //Percolation constructor
+	array_size = size;
+	int true_size = size*size - 4*size + 4; //define size of internal square
+	int int_array[][] = new int[size][size]; //temporary holding array
+	//	for (int i=0; i<array_size; i++) { //set all elements to zero initially
+	//  for (int j=0; j<array_size; j++) {
+	//	int_array[i][j] = 0;
+	//  }
+	//}
+	while (count*100 < density*true_size) { //randomly fill specific density
+	    int z = generator.nextInt(size-2)+1; //two random coordinates
+	    int x = generator.nextInt(size-2)+1;
+	    if (int_array[z][x] == 0 || int_array[z][x] == NaN) { //stop reccurrence
+		int_array[z][x] = 1;
+		count++;
+	    }
+	}
+	cell_array = int_array; //set Percolation instance array to temp array
+    }
+}

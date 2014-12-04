@@ -1,0 +1,77 @@
+} elsif ($size = d3) {
+	@matrix1 = ();
+	@matrix2 = ();
+	print "please enter the size of the three-dimensional matrix\n";
+	$size = <STDIN>;
+	chop($size);
+	if ($size = 2) {
+		$size = 8;
+		$count = 2;
+		print "please enter the lines of the first indent, seperated by commas\n";
+		while ($count > 0) {
+		$i = <STDIN>;
+		chop($i);
+		$i =~ tr/ / /s;
+		if ($i =~ /\,/) {
+			$sep = ",";
+			$i =~ s/ //g;
+		} elsif ($i =~ /\t/) {
+			$sep = "\t";
+			$i =~ s/ //g;
+		} elsif ($i =~ / /) {
+			$sep = " ";
+		}
+		@temp_array1 = split $sep, $i;
+		$j = 0;
+		foreach $elem (@temp_array1) {
+			$matrix1[$row][$j] = $elem;
+			$j++;
+		}
+		$row++;
+		$count--;
+		}
+		print "now enter the lines of second indent\n";
+		$count = 2;
+		while ($count > 0) {
+		$i = <STDIN>;
+		chop($i);
+		$i =~ tr/ / /s;
+		if ($i =~ /\,/) {
+			$sep = ",";
+			$i =~ s/ //g;
+		} elsif ($i =~ /\t/) {
+			$sep = "\t";
+			$i =~ s/ //g;
+		} elsif ($i =~ / /) {
+			$sep = " ";
+		}
+		@temp_array2 = split $sep, $i;
+		$j = 0;
+		foreach $elem (@temp_array2) {
+			$matrix2[$row][$j] = $elem;
+			$j++;
+		}
+		$row++;
+		$count--;
+		}
+		for ($row = 0; $row < 2; $row++) {
+			for ($i = 0; $i < 2; $i++) {
+				print matrix1[$row][$i], "\n";
+			}
+		}
+		for ($row = 0; $row < 2; $row++) {
+			for ($i = 0; $i < 2; $i++) {
+				print matrix2[$row][$i], "\n";
+			}
+		}
+	}
+}
+
+			#print "4: row=$row, i=$i, j=$j, mult=$mult, value=$det[$row + $size]\n"; 
+#			print "\n";
+#				print "4: row=$row, i=$i, j=$j, mult=$mult, value=$det[$row + $size]\n"; 
+#				print "3: row=$row, i=$i, j=$j, mult=$mult, value=$det[$row + $size]\n";  
+			#print "2: row=$row, j=$j, mult=$mult, value=$det[$row]\n";
+#			print "\n";
+#				print "2: row=$row, j=$j, mult=$mult, value=$det[$row]\n";
+#				print "1: row=$row, j=$j, mult=$mult, value=$det[$row]\n";  

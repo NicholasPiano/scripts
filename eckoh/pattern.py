@@ -32,6 +32,8 @@ def generate_with_pattern(pattern):
   return string
 
 ones = ['<ruleref uri=\"Digits.xml#Zero\"/>', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
+teen = 'teen'
+
 tens = ['twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety']
 
 def translate(string):

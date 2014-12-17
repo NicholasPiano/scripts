@@ -33,19 +33,5 @@ def number_to_string(number_string):
 
   return ' '.join([lm[1] for lm in string[::-1]])
 
-def translate(string, pattern):
-  #pairs of numbers should be translated as tens or teens
-  #unless the group of number is greater than four.
-  pair = False
-  number = False
-  for i, char in enumerate(pattern[::-1]):
-    print(char)
-
-
-  ['L','NNNN','LLL','NN','L','NNNNN']
-  ['L','NN','NN','L','L','L','N','N','L','N','N','N','N','N']
-
-
-
-
-translate('L9034YYB06Q89451','LNNNNLLLNNLNNNNN')
+for i in range(100):
+  print(number_to_string(str(i)))

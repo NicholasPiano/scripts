@@ -6,7 +6,6 @@ import random
 
 #define pattern
 letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-letter = re.compile(r'^[a-zA-Z]$')
 
 exclusion_threshold = 100
 max_per_format = 50
@@ -35,7 +34,44 @@ def generate_with_pattern(pattern):
 ones = ['<ruleref uri=\"Digits.xml#Zero\"/>', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
 tens = ['twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety']
 
-def translate():
+def expand(array):
+  ret = []
+  l = [2 if type(lm).__name__=='list' else 1 for lm in array]
+  was_expanded = True
+  if 2 in l:
+    for option in array[l.index(2)]:
+      sub_list = list(array)
+      sub_list[l.index(2)] = option
+      expanded_list, expanded = expand(sub_list)
+      if expanded:
+        ret.extend(expanded_list)
+      else:
+        ret.append(expanded_list)
+  else:
+    ret = ' '.join(array[::-1])
+    was_expanded = False
+  return (ret, was_expanded)
+
+def translate(string):
+  translation = []
+  number = False
+
+  for char in string[::-1]:
+    if char.isalpha():
+      translation.append(char.lower())
+      number = False
+    else:
+      if number:
+        if int(char)>1:
+          translation.append([tens[int(char)-2], ones[int(char)]])
+        else:
+          translation.append(ones[int(char)])
+        number = False
+      else:
+        translation.append(ones[int(char)])
+        number = True
+
+  return expand(translation)[0]
 
 #input from data
 
@@ -61,8 +97,6 @@ with open(os.path.join(fo)) as f:
     if licence.pattern not in unique_patterns:
       unique_patterns.append(licence.pattern)
     licence_list.append(licence)
-
-print(unique_patterns)
 
 #for each unique pattern, generate a random string that conforms to the pattern, but is not currently in the data set
 #make 100 for each and save to output directory with the pattern as the filename.txt
@@ -130,9 +164,9 @@ for pattern in unique_patterns:
   frequency = len(data)
   if frequency >= exclusion_threshold:
     file_name = os.path.join(output_path, pattern+'_decoy.xml')
-   print('pattern: %s above threshold (%d) with frequency %d, writing to %s'%(pattern, exclusion_threshold, frequency, file_name))
+    print('pattern: %s above threshold (%d) with frequency %d, writing to %s'%(pattern, exclusion_threshold, frequency, file_name))
     decoy_set = []
-    for i in range(maxPerFormat):
+    for i in range(max_per_format):
       test_decoy = generate_with_pattern(pattern)
       while ((test_decoy in data) or (test_decoy in decoy_set)):
         test_decoy = generate_with_pattern(pattern)
@@ -142,9 +176,14 @@ for pattern in unique_patterns:
       f.write(gram_preamble)
 
       for decoy in decoy_set:
-        line = r'\t\t<item>%s<tag>VALUE="%s";</tag></item>\n' %(translate(decoy), decoy.lower())
+        line = '\t\t<item>%s<tag>VALUE="%s";</tag></item>\n'
+        translation = translate(decoy)
+        if type(translation).__name__=='list':
+          for translated_decoy in translation:
+            f.write(line%(translated_decoy, decoy))
+        else:
+          f.write(line%(translation, decoy))
 
       f.write(gram_postamble)
   else:
     print('pattern: %s below threshold (%d) with frequency %d, EXCLUDING'%(pattern, exclusion_threshold, frequency))
-

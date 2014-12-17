@@ -3,6 +3,12 @@ teens = dict(ones.items() + {'1':'eleven','2':'twelve','3':'thir','5':'fif','8':
 tens = dict(teens.items() + {'2':'twen','4':'for'}.items())
 
 def number_to_string(number_string):
+  '''
+  Converts a two digit string into a number in English with a couple exceptions:
+  1. If the first character is '0', the string reads 'zero <number>'
+  2. If the string is '10', it reads 'one zero'
+  '''
+
   string = []
 
   if len(number_string)<4:
@@ -22,7 +28,7 @@ def number_to_string(number_string):
         last_char = string[-1][0]
         if last_char=='0':
           string = []
-        output = (char, tens[char]+'ty')
+        output = (char, tens[char]+('ty' if char!='0' else ''))
 
       string.append(output)
       ten = not ten

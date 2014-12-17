@@ -32,7 +32,7 @@ def number_to_string(number_string):
         together = ones[ten] + ' ' + together
       else:
         together = tens[ten] + 'ty' + ((' ' + together) if one!='0' else '')
-    return [together, apart]
+    return [together, apart] if together!=apart else together
 
   if len(number_string)==1:
     string.append(ones[number_string])
@@ -46,7 +46,9 @@ def number_to_string(number_string):
     for char in number_string[::-1]:
       string.append(ones[char])
 
-  return expand(string[::-1])
+  return expand(string[::-1])[0]
 
-for i in range(120):
-  print(number_to_string(str(i)))
+# for i in range(120):
+#   print(number_to_string(str(i)))
+
+# print(number_to_string('117'))

@@ -9,6 +9,7 @@ letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 exclusion_threshold = 100
 max_per_format = 50
+random_set_size = 50
 
 class Licence(object):
 
@@ -183,6 +184,9 @@ output_path = 'grammar'
 if not os.path.exists(output_path): #creates output directory if necessary
   os.makedirs(output_path)
 
+full_decoy_list = []
+random_decoy_list = []
+
 for pattern in unique_patterns:
   filter_method = lambda x: x.pattern==pattern
   data_set = filter(filter_method, licence_list)
@@ -197,6 +201,7 @@ for pattern in unique_patterns:
       while ((test_decoy in data) or (test_decoy in decoy_set)):
         test_decoy = generate_with_pattern(pattern)
       decoy_set.append(test_decoy)
+    full_decoy_list.extend(decoy_set)
 
     with open(file_name, 'w') as f:
       f.write(gram_preamble)
@@ -209,3 +214,20 @@ for pattern in unique_patterns:
       f.write(gram_postamble)
   else:
     print('pattern: %s below threshold (%d) with frequency %d, EXCLUDING'%(pattern, exclusion_threshold, frequency))
+
+preamble = '<rule id=\"DECOY\">\n\t<one-of>\n'
+
+with open(os.path.join(output_path, 'decoy.xml'), 'w') as f:
+
+  f.write(preamble)
+
+  while len(random_decoy_list)<random_set_size:
+    index = random.randint(0,len(full_decoy_list)-1)
+    random_decoy_list.append(full_decoy_list[index])
+
+  for decoy in random_decoy_list:
+    line = '\t\t<item>%s<tag>VALUE="%s";</tag></item>\n'
+    for translation in translate(decoy):
+      f.write(line%(translation[0], decoy))
+
+  f.write(gram_postamble)
